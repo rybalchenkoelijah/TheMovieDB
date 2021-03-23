@@ -1,0 +1,11 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation rootProject.ext.domainDependencies.kotlin
+    implementation rootProject.ext.domainDependencies.rxJava
+    implementation rootProject.ext.domainDependencies.dagger
+
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"

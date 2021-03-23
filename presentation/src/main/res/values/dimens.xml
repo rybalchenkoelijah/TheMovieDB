@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    d<dimen name="movieCardCornerRadius">4dp</dimen>
+    d<dimen name="movieCardDefaultMargin">8dp</dimen>
+    d<dimen name="moviePosterSize">64dp</dimen>
+</resources>

@@ -1,0 +1,151 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+ext {
+    //Application
+    versionNumber = 1
+    versionCodename = "1.0"
+
+    //Android
+    androidMinSdkVersion = 22
+    androidTargetSdkVersion = 29
+    androidCompileSdkVersion = 29
+
+    testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+
+    //Libraries
+    gradleVersion = "4.1.3"
+    kotlinVersion = "1.3.72"
+
+    coreKtxVersion = "1.3.2"
+    appcompatVersion = "1.2.0"
+    materialVersion = "1.3.0"
+    constraintVersion = "2.0.4"
+    activityKtxVersion = "1.2.1"
+    fragmentKtxVersion = "1.3.1"
+    swipeRefreshVersion = "1.1.0"
+
+    databindingVersion = "3.1.4"
+
+    daggerVersion = "2.33"
+
+    navigationVersion = "2.3.0"
+
+    converterGsonVersion = "2.9.0"
+    retrofitVersion = "2.9.0"
+    retrofitRxJavaAdapterVersion = "2.9.0"
+    okHttpVersion ="4.9.0"
+    loggingInterceptorVersion = "4.9.0"
+
+    rxJavaVersion = "2.2.9"
+    rxAndroidVersion = "2.0.1"
+
+    roomVersion = "2.2.6"
+
+    stethoVersion = "1.5.1"
+
+    glideVersion = "4.11.0"
+    glideOkHttpVersion = "4.11.0"
+
+    pagingVersion = "2.1.2"
+
+    javaxVersion = "1.2"
+
+    //Testing
+    jUnitVersion = "4.13.2"
+    jUnitExtVersion = "1.1.2"
+    espressoVersion = "3.3.0"
+
+    presentationDependencies = [
+            kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+            coreKtx:                    "androidx.core:core-ktx:$coreKtxVersion",
+            appcomapt:                  "androidx.appcompat:appcompat:$appcompatVersion",
+            material:                   "com.google.android.material:material:$materialVersion",
+            constraint:                 "androidx.constraintlayout:constraintlayout:$constraintVersion",
+            activityKtx:                "androidx.activity:activity-ktx:$activityKtxVersion",
+            fragmentKtx:                "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
+            databindig:                 "com.android.databinding:compiler:$databindingVersion",
+            daggerAndroid:              "com.google.dagger:dagger-android:$daggerVersion",
+            daggerAndroidSupport:       "com.google.dagger:dagger-android-support:$daggerVersion",
+            daggerAndroidProcessor:     "com.google.dagger:dagger-android-processor:$daggerVersion",
+            dagger:                     "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler:             "com.google.dagger:dagger-compiler:$daggerVersion",
+            navigation:                 "android.arch.navigation:navigation-fragment:$navigationVersion",
+            navigationFragmentKtx:      "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
+            navigationActivityKtx:      "androidx.navigation:navigation-ui-ktx:$navigationVersion",
+            convertorGson:              "com.squareup.retrofit2:converter-gson:$converterGsonVersion",
+            retrofit:                   "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitRxJavaAdapter:      "com.squareup.retrofit2:adapter-rxjava2:$retrofitRxJavaAdapterVersion",
+            okHttpInterceptor:          "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion",
+            okHttp:                     "com.squareup.okhttp3:okhttp:$okHttpVersion",
+            rxJava:                     "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            rxAndroid:                  "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+            roomKtx:                    "androidx.room:room-ktx:$roomVersion",
+            roomRuntime:                "androidx.room:room-runtime:$roomVersion",
+            roomRxJava:                 "androidx.room:room-rxjava2:$roomVersion",
+            roomCompiler:               "androidx.room:room-compiler:$roomVersion",
+            stetho:                     "com.facebook.stetho:stetho:$stethoVersion",
+            stethoOkHttp:               "com.facebook.stetho:stetho-okhttp3:$stethoVersion",
+            glide:                      "com.github.bumptech.glide:glide:$glideVersion",
+            glideOkHttp:                "com.github.bumptech.glide:okhttp3-integration:$glideOkHttpVersion",
+            glideRecycler:              "com.github.bumptech.glide:recyclerview-integration:$glideVersion",
+            pagingRuntime:              "androidx.paging:paging-runtime:$pagingVersion",
+            pagingRxJava:               "androidx.paging:paging-rxjava2:$pagingVersion",
+            javax:                      "javax.annotation:javax.annotation-api:$javaxVersion",
+            swipeRefresh:                   "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshVersion"
+    ]
+
+    presentationTestDependencies = [
+            junit:              "junit:junit:${jUnitVersion}",
+            roomTesting:        "androidx.room:room-testing:${roomVersion}",
+            espresso:           "androidx.test.espresso:espresso-core:${espressoVersion}",
+            mockserver:         "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
+    ]
+
+    domainDependencies = [
+            kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+            rxJava:                     "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            dagger:                     "com.google.dagger:dagger:$daggerVersion"
+    ]
+
+    domainTestDependencies = [
+            junit:              "junit:junit:${jUnitVersion}",
+            roomTesting:        "androidx.room:room-testing:${roomVersion}",
+            espresso:           "androidx.test.espresso:espresso-core:${espressoVersion}",
+            mockserver:         "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
+    ]
+
+
+
+    dataDependencies = [
+            kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+            coreKtx:                    "androidx.core:core-ktx:${coreKtxVersion}",
+            daggerAndroid:              "com.google.dagger:dagger-android:$daggerVersion",
+            daggerAndroidSupport:       "com.google.dagger:dagger-android-support:$daggerVersion",
+            daggerAndroidProcessor:     "com.google.dagger:dagger-android-processor:$daggerVersion",
+            dagger:                     "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler:             "com.google.dagger:dagger-compiler:$daggerVersion",
+            convertorGson:              "com.squareup.retrofit2:converter-gson:$converterGsonVersion",
+            retrofit:                   "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitRxJavaAdapter:      "com.squareup.retrofit2:adapter-rxjava2:$retrofitRxJavaAdapterVersion",
+            okHttpInterceptor:          "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion",
+            okHttp:                     "com.squareup.okhttp3:okhttp:$okHttpVersion",
+            rxJava:                     "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            roomKtx:                    "androidx.room:room-ktx:$roomVersion",
+            roomRuntime:                "androidx.room:room-runtime:$roomVersion",
+            roomRxJava:                 "androidx.room:room-rxjava2:$roomVersion",
+            roomCompiler:               "androidx.room:room-compiler:$roomVersion",
+            pagingRuntime:              "androidx.paging:paging-runtime:$pagingVersion",
+            pagingRxJava:               "androidx.paging:paging-rxjava2:$pagingVersion"
+    ]
+
+    dataTestDependencies = [
+            junit:              "junit:junit:${jUnitVersion}",
+            roomTesting:        "androidx.room:room-testing:${roomVersion}",
+            espresso:           "androidx.test.espresso:espresso-core:${espressoVersion}",
+            mockserver:         "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
+    ]
+
+}

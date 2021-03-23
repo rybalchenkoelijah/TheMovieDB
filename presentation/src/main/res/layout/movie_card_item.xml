@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="movie"
+            type="rybalchenko.elijah.domain.entity.Movie" />
+
+        <variable
+            name="isFavorite"
+            type="Boolean" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        android:layout_marginHorizontal="@dimen/movieCardDefaultMargin"
+        android:layout_marginBottom="@dimen/movieCardDefaultMargin"
+        app:cardCornerRadius="@dimen/movieCardCornerRadius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/posterIV"
+                android:layout_width="@dimen/moviePosterSize"
+                android:layout_height="@dimen/moviePosterSize"
+                android:layout_margin="@dimen/movieCardDefaultMargin"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/titleIV"
+                style="@style/TitleBoldH1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/movieCardDefaultMargin"
+                android:layout_marginEnd="@dimen/movieCardDefaultMargin"
+                android:ellipsize="end"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/posterIV"
+                app:layout_constraintTop_toTopOf="@id/posterIV"
+                android:text="@{movie.title}"
+                tools:text="@string/movie_item_example_title" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/descriptionIV"
+                style="@style/TitleH3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/movieCardDefaultMargin"
+                android:layout_marginTop="@dimen/movieCardDefaultMargin"
+                android:layout_marginEnd="@dimen/movieCardDefaultMargin"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:minLines="3"
+                android:text="@{movie.description}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/posterIV"
+                app:layout_constraintTop_toBottomOf="@id/titleIV"
+                tools:text="@string/movie_item_example_description" />
+
+            <View
+                android:id="@+id/dividerV"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/movieCardDefaultMargin"
+                android:layout_marginTop="@dimen/movieCardDefaultMargin"
+                android:background="@color/divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/posterIV"
+                app:layout_constraintTop_toBottomOf="@id/descriptionIV" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/movieCardDefaultMargin"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/posterIV"
+                app:layout_constraintTop_toBottomOf="@id/dividerV">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/addRemoveBT"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{isFavorite ? @string/movie_item_remove: @string/movie_item_add_to_favorites}"
+                    android:textAllCaps="true"
+                    tools:text="@string/movie_item_add_to_favorites" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/shareBT"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/movie_item_share" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

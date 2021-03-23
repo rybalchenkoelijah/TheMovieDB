@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Title" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TitleH1" parent="Title">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TitleBoldH1" parent="TitleH1">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleMediumH1" parent="TitleH1">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TitleH2" parent="Title">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="TitleBoldH2" parent="TitleH2">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleMediumH2" parent="TitleH2">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TitleH3" parent="Title">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TitleBoldH3" parent="TitleH3">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleMediumH3" parent="TitleH3">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TitleH4" parent="Title">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TitleBoldH4" parent="TitleH4">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleMediumH4" parent="TitleH4">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TitleH5" parent="Title">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TitleBoldH5" parent="TitleH5">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleMediumH5" parent="TitleH5">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TitleH6" parent="Title">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TitleBoldH6" parent="TitleH6">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TitleMediumH6" parent="TitleH6">
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+</resources>

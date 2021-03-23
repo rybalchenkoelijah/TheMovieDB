@@ -1,0 +1,88 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+
+    defaultConfig {
+        applicationId "rybalchenko.elijah.test"
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode rootProject.ext.versionNumber
+        versionName rootProject.ext.versionCodename
+
+        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    buildFeatures {
+        dataBinding = true
+    }
+    kapt {
+        generateStubs = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    def deps = rootProject.ext.presentationDependencies
+    def depsTest = rootProject.ext.presentationTestDependencies
+
+    implementation project(':domain')
+    implementation project(':data')
+
+    implementation deps.kotlin
+    implementation deps.coreKtx
+    implementation deps.appcomapt
+    implementation deps.material
+    implementation deps.constraint
+    implementation deps.activityKtx
+    implementation deps.fragmentKtx
+    implementation deps.databindig
+    implementation deps.daggerAndroid
+    implementation deps.daggerAndroidSupport
+    implementation deps.dagger
+    implementation deps.navigation
+    implementation deps.navigationFragmentKtx
+    implementation deps.navigationActivityKtx
+    implementation deps.convertorGson
+    implementation deps.retrofit
+    implementation deps.retrofitRxJavaAdapter
+    implementation deps.okHttpInterceptor
+    implementation deps.okHttp
+    implementation deps.rxJava
+    implementation deps.rxAndroid
+    implementation deps.roomRuntime
+    implementation deps.roomKtx
+    implementation deps.roomRxJava
+    implementation deps.stetho
+    implementation deps.stethoOkHttp
+    implementation deps.glide
+    implementation deps.glideOkHttp
+    implementation deps.glideRecycler
+    implementation deps.pagingRuntime
+    implementation deps.pagingRxJava
+    implementation deps.javax
+    implementation deps.swipeRefresh
+
+    kapt deps.daggerAndroidProcessor
+    kapt deps.daggerCompiler
+    kapt deps.roomCompiler
+}
