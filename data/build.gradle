@@ -49,6 +49,7 @@ dependencies {
     implementation deps.okHttpInterceptor
     implementation deps.okHttp
     implementation deps.rxJava
+    implementation deps.rxAndroid
     implementation deps.roomRuntime
     implementation deps.roomKtx
     implementation deps.roomRxJava
@@ -58,4 +59,14 @@ dependencies {
     kapt deps.daggerAndroidProcessor
     kapt deps.daggerCompiler
     kapt deps.roomCompiler
+
+    testImplementation depsTest.junit
+    testImplementation depsTest.roomTesting
+
+    androidTestImplementation depsTest.mockserver
+    androidTestImplementation depsTest.espresso
+    androidTestImplementation depsTest.androidTestCore
+    androidTestImplementation depsTest.androidTestRunner
+    androidTestImplementation depsTest.androidArchTestCore
+    androidTestImplementation depsTest.pagingCommon
 }

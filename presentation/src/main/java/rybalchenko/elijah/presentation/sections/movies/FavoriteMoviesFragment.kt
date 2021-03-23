@@ -17,7 +17,7 @@ class FavoriteMoviesFragment : BaseMoviesFragment<FavoriteMoviesViewModel>(), Fr
         super.setupAdapter()
         adapter.isFavorite = true
         adapter.clickListener = { movie ->
-            viewModel.removeFromFavorite(movie) {}
+            viewModel.removeFromFavorite(movie)
         }
     }
 }

@@ -15,7 +15,7 @@ import rybalchenko.elijah.test.R
 import rybalchenko.elijah.test.databinding.MoviesFragmentBinding
 import javax.inject.Inject
 
-abstract class BaseMoviesFragment<ViewModel : BaseMoviesViewModel<*>> :
+abstract class BaseMoviesFragment<ViewModel : BaseMoviesViewModel> :
     BaseFragment<ViewModel, MoviesFragmentBinding>(), FragmentInject {
     override fun getLayoutId() = R.layout.movies_fragment
 

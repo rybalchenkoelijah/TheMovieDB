@@ -17,7 +17,6 @@ import rybalchenko.elijah.domain.entity.Movie
 import rybalchenko.elijah.domain.entity.MoviesPage
 import rybalchenko.elijah.domain.repository.MovieRepository
 import rybalchenko.elijah.presentation.utils.data.FavoriteMovieDataSourceFactory
-import rybalchenko.elijah.presentation.utils.data.MovieDataSourceFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -33,15 +32,7 @@ interface MovieDataModule {
 
     @Binds
     @Singleton
-    fun provideMovieListPageMapper(mapper: MovieListPageMapper): ListMapper<MovieData, MoviesPageData>
-
-    @Binds
-    @Singleton
     fun provideMoviePageEntityMapper(mapper: MoviePageDataEntityMapper): Mapper<MoviesPageData, MoviesPage>
-
-    @Binds
-    @Singleton
-    fun provideMovieDataSourceFactory(factory: MovieDataSourceFactory): DataSource.Factory<Int, Movie>
 
     @Binds
     @Singleton
@@ -66,8 +57,8 @@ interface MovieDataModule {
         @Singleton
         fun provideMoviePagedConfig(): PagedList.Config = PagedList.Config.Builder()
             .setPageSize(20)
-            .setInitialLoadSizeHint(40)
-            .setEnablePlaceholders(true)
+            .setInitialLoadSizeHint(60)
+            .setPrefetchDistance(5)
             .build()
     }
 }

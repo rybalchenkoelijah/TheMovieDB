@@ -23,15 +23,6 @@ data class MoviesPageData(
     val movies: List<MovieData>
 )
 
-class MovieListPageMapper @Inject constructor() : ListMapper<MovieData, MoviesPageData> {
-    override fun mapFromList(from: List<MovieData>) = MoviesPageData(
-        page = 1,
-        totalPages = 1,
-        totalResult = from.size,
-        movies = from
-    )
-}
-
 class MoviePageDataEntityMapper @Inject constructor(private val moviesDataEntityMapper: MovieDataEntityMapper): Mapper<MoviesPageData, MoviesPage> {
     override fun mapFrom(from: MoviesPageData) = MoviesPage(
         page = from.page,

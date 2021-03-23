@@ -1,6 +1,6 @@
 package rybalchenko.elijah.data.repository
 
-import io.reactivex.Observable
+import io.reactivex.Single
 import rybalchenko.elijah.data.api.MovieApi
 import rybalchenko.elijah.data.db.DateConverter
 import rybalchenko.elijah.data.entity.MoviesPageData
@@ -13,13 +13,13 @@ class RemoteMovieDataStore @Inject constructor(
     private val apiKey: String,
     private val converter: DateConverter,
     private val movieApi: MovieApi
-) : MovieDataStore {
-    override fun findMoviesBySearchParams(searchParams: SearchParams): Observable<MoviesPageData> {
+) {
+    fun findMoviesBySearchParams(searchParams: SearchParams): Single<MoviesPageData> {
         return movieApi.getMoviesByPeriod(
             apiKey, searchParams.currentPage,
             searchParams.sortBy,
             converter.dateToString(searchParams.startPeriod),
             converter.dateToString(searchParams.endPeriod)
-        ).toObservable()
+        )
     }
 }

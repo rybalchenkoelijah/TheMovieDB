@@ -5,37 +5,40 @@ import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
 import rybalchenko.elijah.domain.entity.DataState
 import rybalchenko.elijah.domain.entity.Movie
-import rybalchenko.elijah.domain.usecase.UpdateMoviesUseCase
+import rybalchenko.elijah.domain.usecase.FavoriteMovieDataSourceUseCase
 import rybalchenko.elijah.presentation.utils.rx.AppSchedulers
 import rybalchenko.elijah.presentation.utils.rx.with
 
-abstract class BaseMoviesViewModel<DS : DataSource.Factory<Int, Movie>> constructor(
+abstract class BaseMoviesViewModel constructor(
     protected val schedulers: AppSchedulers,
-    private val updateMoviesUseCase: UpdateMoviesUseCase,
+    private val favoriteMovieDataSourceUseCase: FavoriteMovieDataSourceUseCase,
     moviePagedConfig: PagedList.Config
 ) : BaseViewModel() {
-    abstract var movieDataSourceFactory: DS
-    abstract val dataState: Observable<DataState>
-    open val movieList: LiveData<PagedList<Movie>> by lazy {
+    protected val _dataState = BehaviorSubject.create<DataState>()
+    val dataState: Observable<DataState> = _dataState.hide()
+    abstract val movieDataSourceFactory: DataSource.Factory<Int, Movie>
+    abstract val boundaryCallback: PagedList.BoundaryCallback<Movie>
+    val movieList: LiveData<PagedList<Movie>> by lazy {
         LivePagedListBuilder<Int, Movie>(
             movieDataSourceFactory,
             moviePagedConfig
-        ).build()
+        ).setBoundaryCallback(boundaryCallback).build()
     }
 
-    fun removeFromFavorite(movie: Movie, successCallback: () -> Unit = {}) {
-        updateMoviesUseCase.invoke(movie, false)
+    fun removeFromFavorite(movie: Movie) {
+        favoriteMovieDataSourceUseCase.updateFavoriteMovie(movie, false)
             .subscribeOn(schedulers.io())
             .observeOn(schedulers.mainThread())
-            .subscribe(successCallback) with disposable
+            .subscribe() with disposable
     }
 
-    fun addToFavorite(movie: Movie, successCallback: () -> Unit = {}) {
-        updateMoviesUseCase.invoke(movie, true)
+    fun addToFavorite(movie: Movie) {
+        favoriteMovieDataSourceUseCase.updateFavoriteMovie(movie, true)
             .subscribeOn(schedulers.io())
-            .subscribe { successCallback } with disposable
+            .subscribe() with disposable
     }
 
     fun refresh() {

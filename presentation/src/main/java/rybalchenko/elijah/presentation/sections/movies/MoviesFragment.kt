@@ -11,10 +11,6 @@ class MoviesFragment : BaseMoviesFragment<MoviesViewModel>(), FragmentInject {
 
     override val viewModel: MoviesViewModel by lazy { viewModel<MoviesViewModel>(viewModelFactory) }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun setupAdapter() {
         super.setupAdapter()
         adapter.clickListener = { movie ->  viewModel.addToFavorite(movie) }

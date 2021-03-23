@@ -8,10 +8,8 @@ data class SearchParams(
     val endPeriod: Date,
     val currentPage: Int,
     val pageSize: Int,
-    val isLastPage: Boolean,
     val sortBy: String
 ) {
-    val offset = (currentPage - 1) * pageSize
 
     companion object {
         fun createTwoWeeksSearchParams(): SearchParams = SearchParams(
@@ -19,8 +17,7 @@ data class SearchParams(
             Date(System.currentTimeMillis()),
             1,
             20,
-            false,
-            "primary_release_date.desc"
+            "original_title.desc"
         )
     }
 }

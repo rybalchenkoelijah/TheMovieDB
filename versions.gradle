@@ -13,7 +13,7 @@ ext {
     androidTargetSdkVersion = 29
     androidCompileSdkVersion = 29
 
-    testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     //Libraries
     gradleVersion = "4.1.3"
@@ -57,6 +57,9 @@ ext {
     jUnitVersion = "4.13.2"
     jUnitExtVersion = "1.1.2"
     espressoVersion = "3.3.0"
+    mockitoVersion = '3.3.3'
+    runnerVersion = '1.2.0'
+    archTestCoreVersion = '1.2.0'
 
     presentationDependencies = [
             kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
@@ -107,14 +110,20 @@ ext {
     domainDependencies = [
             kotlin:                     "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
             rxJava:                     "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
-            dagger:                     "com.google.dagger:dagger:$daggerVersion"
+            dagger:                     "com.google.dagger:dagger:$daggerVersion",
+            pagingRxJava:               "androidx.paging:paging-rxjava2:$pagingVersion",
+            pagingRuntime:              "androidx.paging:paging-runtime:$pagingVersion"
     ]
 
     domainTestDependencies = [
-            junit:              "junit:junit:${jUnitVersion}",
-            roomTesting:        "androidx.room:room-testing:${roomVersion}",
-            espresso:           "androidx.test.espresso:espresso-core:${espressoVersion}",
-            mockserver:         "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
+            junit:                  "junit:junit:${jUnitVersion}",
+            mockito:                "org.mockito:mockito-core:${mockitoVersion}",
+            mockitoAndroid:         "org.mockito:mockito-android:${mockitoVersion}",
+            espresso:               "androidx.test.espresso:espresso-core:${espressoVersion}",
+            androidTestCore:        "androidx.test:core:${runnerVersion}",
+            androidTestRunner:      "androidx.test:runner:${runnerVersion}",
+            androidArchTestCore:    "android.arch.core:core-testing:$archTestCoreVersion",
+            pagingCommon:           "androidx.paging:paging-common:$pagingVersion"
     ]
 
 
@@ -138,14 +147,20 @@ ext {
             roomRxJava:                 "androidx.room:room-rxjava2:$roomVersion",
             roomCompiler:               "androidx.room:room-compiler:$roomVersion",
             pagingRuntime:              "androidx.paging:paging-runtime:$pagingVersion",
-            pagingRxJava:               "androidx.paging:paging-rxjava2:$pagingVersion"
+            pagingRxJava:               "androidx.paging:paging-rxjava2:$pagingVersion",
+            rxAndroid:                  "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     ]
 
     dataTestDependencies = [
-            junit:              "junit:junit:${jUnitVersion}",
-            roomTesting:        "androidx.room:room-testing:${roomVersion}",
-            espresso:           "androidx.test.espresso:espresso-core:${espressoVersion}",
-            mockserver:         "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
+            junit:                  "junit:junit:${jUnitVersion}",
+            roomTesting:            "androidx.room:room-testing:${roomVersion}",
+            espresso:               "androidx.test.espresso:espresso-core:${espressoVersion}",
+            androidTestCore:        "androidx.test:core:${runnerVersion}",
+            mockserver:             "com.squareup.okhttp3:mockwebserver:${okHttpVersion}",
+            androidTestRunner:      "androidx.test:runner:${runnerVersion}",
+            androidArchTestCore:    "android.arch.core:core-testing:$archTestCoreVersion",
+            pagingCommon:           "androidx.paging:paging-common:$pagingVersion"
+
     ]
 
 }

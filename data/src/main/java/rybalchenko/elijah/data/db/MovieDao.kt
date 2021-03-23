@@ -1,5 +1,6 @@
 package rybalchenko.elijah.data.db
 
+import androidx.paging.DataSource
 import androidx.paging.PositionalDataSource
 import androidx.room.*
 import io.reactivex.Completable
@@ -18,11 +19,12 @@ interface MovieDao {
     @Query("UPDATE movie_data SET isFavorite=:isFavorite WHERE id=:id")
     fun setFavoriteById(id: Int, isFavorite: Boolean): Completable
 
-    @Query("SELECT * FROM movie_data WHERE release_date >= :startPeriod AND release_date <= :endPeriod ORDER BY release_date DESC LIMIT :limit OFFSET :offset")
-    fun searchMoviesInPeriod(
+    @Query("SELECT * FROM movie_data WHERE release_date >= :startPeriod AND release_date <= :endPeriod ORDER BY original_title DESC")
+    fun getMoviesDataSource(
         startPeriod: Date,
-        endPeriod: Date,
-        offset: Int,
-        limit: Int
-    ): Observable<List<MovieData>>
+        endPeriod: Date
+    ): PositionalDataSource<MovieData>
+
+    @Query("SELECT * FROM movie_data WHERE id IN (:moviesId) ")
+    fun loadById(moviesId: List<Int>): Observable<List<MovieData>>
 }
