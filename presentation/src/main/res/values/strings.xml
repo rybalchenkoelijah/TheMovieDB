@@ -4,10 +4,11 @@
     <string name="movie_item_example_description">McCall believes he has put his mysterious past behind him and dedicated himself to beginning a new, quiet life. But when he meets Teri, a young girl under the control of ultra-violent Russian gangsters, he can’t stand idly by – he has to help her. Armed with hidden skills that allow him to serve vengeance against anyone who would brutalize the helpless, McCall comes out of his self-imposed retirement and finds his desire for justice reawakened. If someone has a problem, if the odds are stacked against them, if they have nowhere else to turn, McCall will help. He is The Equalizer.</string>
     <string name="movie_item_add_to_favorites">Add to favorites</string>
     <string name="movie_item_share">Share</string>
-    <string name="movie_item_remove">Remove</string>
+    <string name="movie_item_remove">Remove from favorites</string>
     <string name="movies_fragment_list_is_empty">List is empty</string>
     <string name="movies_fragment_something_went_wrong">Something went wrong.</string>
     <string name="movies_fragment_retry">Retry</string>
     <string name="main_fragment_films">Films</string>
     <string name="main_fragment_favorites">Favorites</string>
+    <string name="movies_fragment_share">Share the movie: %s \n\n%s \n\nhttps://www.themoviedb.org/movie/%d</string>
 </resources>

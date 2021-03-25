@@ -29,12 +29,11 @@ class FavoriteMoviesViewModel @Inject constructor(
     override val boundaryCallback: PagedList.BoundaryCallback<Movie> =
         object : PagedList.BoundaryCallback<Movie>() {
             override fun onZeroItemsLoaded() {
-                _dataState.onNext(DataState.EMPTY)
+                dataState.onNext(DataState.EMPTY)
             }
 
             override fun onItemAtEndLoaded(itemAtEnd: Movie) {
-                _dataState.onNext(DataState.SUCCESS)
+                dataState.onNext(DataState.SUCCESS)
             }
         }
-
 }

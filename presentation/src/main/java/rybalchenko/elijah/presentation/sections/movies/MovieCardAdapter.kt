@@ -18,21 +18,21 @@ class MovieCardAdapter @Inject constructor(
 ) :
     PagedListAdapter<Movie, MovieCardAdapter.MovieCardViewHolder>(diffCallback) {
 
-    var isFavorite = false
     var clickListener: ((Movie) -> Unit)? = null
+    var shareListener: ((Movie) -> Unit)? = null
 
     class MovieCardViewHolder(
         itemView: View, private val imageLoader: ImageLoader,
         private val clickListener: ((Movie) -> Unit)?,
-        private val isFavorite: Boolean
+        private val shareListener: ((Movie) -> Unit)?
     ) :
         RecyclerView.ViewHolder(itemView) {
         private val binding = MovieCardItemBinding.bind(itemView)
 
         fun bind(movie: Movie) {
             binding.movie = movie
-            binding.isFavorite = isFavorite
             binding.addRemoveBT.setOnClickListener { clickListener?.invoke(movie) }
+            binding.shareBT.setOnClickListener { shareListener?.invoke(movie)}
             imageLoader.loadImage(movie.posterPath, binding.posterIV)
 
         }
@@ -43,7 +43,7 @@ class MovieCardAdapter @Inject constructor(
             LayoutInflater.from(parent.context).inflate(R.layout.movie_card_item, parent, false),
             imageLoader,
             clickListener,
-            isFavorite
+            shareListener
         )
     }
 

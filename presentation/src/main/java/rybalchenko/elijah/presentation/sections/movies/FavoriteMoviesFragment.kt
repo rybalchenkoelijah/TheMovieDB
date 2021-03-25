@@ -15,7 +15,6 @@ class FavoriteMoviesFragment : BaseMoviesFragment<FavoriteMoviesViewModel>(), Fr
 
     override fun setupAdapter() {
         super.setupAdapter()
-        adapter.isFavorite = true
         adapter.clickListener = { movie ->
             viewModel.removeFromFavorite(movie)
         }

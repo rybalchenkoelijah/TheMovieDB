@@ -20,28 +20,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 import rybalchenko.elijah.data.api.MovieApi
 import rybalchenko.elijah.data.db.DateConverter
 import rybalchenko.elijah.data.db.MovieDb
-import rybalchenko.elijah.data.entity.MovieDataEntityMapper
-import rybalchenko.elijah.data.entity.MoviePageDataEntityMapper
-import rybalchenko.elijah.domain.entity.DataEntity
-import rybalchenko.elijah.domain.entity.MoviesPage
 import rybalchenko.elijah.domain.entity.SearchParams
-
-import rybalchenko.elijah.domain.repository.MovieRepository
 import java.io.IOException
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-class MovieRepositoryTest {
+class RemoteMovieDataStoreTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val mockWebServer = MockWebServer()
     private lateinit var db: MovieDb
-    private lateinit var repository: MovieRepository
-    private lateinit var localStore: LocalMovieDataStore
     private lateinit var remoteStore: RemoteMovieDataStore
 
-    private val dataEntityMapper = MovieDataEntityMapper()
-    private val pageDataEntityMapper = MoviePageDataEntityMapper(dataEntityMapper)
     private val dateConvertor = DateConverter()
     private val gson = GsonBuilder().create()
     private val httpLoggingInterceptor = HttpLoggingInterceptor()
@@ -66,9 +56,6 @@ class MovieRepositoryTest {
             .create(MovieApi::class.java)
 
         remoteStore = RemoteMovieDataStore("", dateConvertor, apiService)
-        localStore = LocalMovieDataStore(db.getMovieDao())
-        repository =
-            MovieRepositoryImpl(localStore, remoteStore, pageDataEntityMapper, dataEntityMapper)
     }
 
     @After
@@ -79,7 +66,7 @@ class MovieRepositoryTest {
     }
 
     @Test
-    fun loadMoviesPageWithSuccessResponse() {
+    fun findMoviesWithSuccessResponse() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val input = context.assets.open("okResponse")
         mockWebServer.enqueue(MockResponse().apply {
@@ -87,16 +74,16 @@ class MovieRepositoryTest {
             setBody(Buffer().readFrom(input))
         })
         input.close()
-        val response = repository.loadMovieFromRemote(searchParams).test()
+        val response = remoteStore.findMoviesBySearchParams(searchParams).test()
         response.awaitTerminalEvent()
-        response.assertValue { value -> value is DataEntity.Success && value.data.movies.size == 20 }
-        response.assertValue { value -> value is DataEntity.Success && value.data.page == 2 }
-        response.assertValue { value -> value is DataEntity.Success && value.data.totalCount == 125 }
-        response.assertValue { value -> value is DataEntity.Success && value.data.totalPages == 7 }
+        response.assertValue { value -> value.movies.size == 20 }
+        response.assertValue { value -> value.totalPages == 7 }
+        response.assertValue { value -> value.totalResult == 125 }
+        response.assertValue { value -> value.page == 2 }
     }
 
     @Test
-    fun  loadMoviesPageWithErrorResponse() {
+    fun findMoviesWithErrorResponse() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val input = context.assets.open("failedResponse")
         mockWebServer.enqueue(MockResponse().apply {
@@ -104,9 +91,8 @@ class MovieRepositoryTest {
             setBody(Buffer().readFrom(input))
         })
         input.close()
-        val response = repository.loadMovieFromRemote(searchParams).test()
+        val response = remoteStore.findMoviesBySearchParams(searchParams).test()
         response.awaitTerminalEvent()
-        response.assertValue { value -> value is DataEntity.Error && value.data == MoviesPage.EMPTY }
-        response.assertValue { value -> value is DataEntity.Error && value.error.message == "HTTP 422 Client Error" }
+        response.assertError { error -> true }
     }
 }

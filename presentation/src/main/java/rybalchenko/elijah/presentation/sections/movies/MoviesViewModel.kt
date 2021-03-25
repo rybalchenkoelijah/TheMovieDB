@@ -36,43 +36,43 @@ class MoviesViewModel @Inject constructor(
     override val boundaryCallback = object : PagedList.BoundaryCallback<Movie>() {
         override fun onZeroItemsLoaded() {
             movieDataSourceUseCase.loadMovieFromRemote(searchParams)
-                .doOnSubscribe { _dataState.onNext(DataState.PROGRESS) }
+                .doOnSubscribe { dataState.onNext(DataState.PROGRESS) }
                 .subscribe({ dataEntity ->
                     when (dataEntity) {
-                        is DataEntity.Error -> _dataState.onNext(DataState.FAILED)
+                        is DataEntity.Error -> dataState.onNext(DataState.FAILED)
                         is DataEntity.Success -> {
-                            _dataState.onNext(DataState.SUCCESS)
+                            dataState.onNext(DataState.SUCCESS)
                             searchParams =
                                 searchParams.copy(currentPage = searchParams.currentPage + 1)
                         }
                     }
                     if (dataEntity.data.movies.isEmpty()) {
-                        _dataState.onNext(DataState.EMPTY)
+                        dataState.onNext(DataState.EMPTY)
                     }
                 }, {
-                    _dataState.onNext(DataState.FAILED)
+                    dataState.onNext(DataState.FAILED)
                 }) with disposable
         }
 
         override fun onItemAtEndLoaded(itemAtEnd: Movie) {
             movieDataSourceUseCase.loadMovieFromRemote(searchParams)
-                .doOnSubscribe { _dataState.onNext(DataState.PROGRESS) }
+                .doOnSubscribe { dataState.onNext(DataState.PROGRESS) }
                 .subscribe({ dataEntity ->
                     when (dataEntity) {
-                        is DataEntity.Error -> _dataState.onNext(DataState.FAILED)
+                        is DataEntity.Error -> dataState.onNext(DataState.FAILED)
                         is DataEntity.Success -> {
-                            _dataState.onNext(DataState.SUCCESS)
+                            dataState.onNext(DataState.SUCCESS)
                             searchParams =
                                 searchParams.copy(currentPage = searchParams.currentPage + 1)
                         }
                     }
                 }, {
-                    _dataState.onNext(DataState.FAILED)
+                    dataState.onNext(DataState.FAILED)
                 }) with disposable
         }
 
         override fun onItemAtFrontLoaded(itemAtFront: Movie) {
-            _dataState.onNext(DataState.SUCCESS)
+            dataState.onNext(DataState.SUCCESS)
         }
     }
 }

@@ -1,7 +1,5 @@
 package rybalchenko.elijah.presentation.sections.movies
 
-import android.os.Bundle
-import android.view.View
 import rybalchenko.elijah.presentation.base.BaseMoviesFragment
 import rybalchenko.elijah.presentation.utils.di.FragmentInject
 import rybalchenko.elijah.presentation.utils.viewmodel.viewModel
@@ -13,6 +11,12 @@ class MoviesFragment : BaseMoviesFragment<MoviesViewModel>(), FragmentInject {
 
     override fun setupAdapter() {
         super.setupAdapter()
-        adapter.clickListener = { movie ->  viewModel.addToFavorite(movie) }
+        adapter.clickListener = { movie ->
+            if (movie.isFavorite) {
+                viewModel.removeFromFavorite(movie)
+            } else {
+                viewModel.addToFavorite(movie)
+            }
+        }
     }
 }

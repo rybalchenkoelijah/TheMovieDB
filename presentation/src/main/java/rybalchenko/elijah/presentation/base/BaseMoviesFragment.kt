@@ -1,11 +1,9 @@
 package rybalchenko.elijah.presentation.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
-import androidx.paging.PagedList
 import rybalchenko.elijah.domain.entity.DataState
-import rybalchenko.elijah.domain.entity.Movie
 import rybalchenko.elijah.presentation.sections.movies.MovieCardAdapter
 import rybalchenko.elijah.presentation.utils.di.FragmentInject
 import rybalchenko.elijah.presentation.utils.rx.AppSchedulers
@@ -33,17 +31,26 @@ abstract class BaseMoviesFragment<ViewModel : BaseMoviesViewModel> :
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
         observeOnData()
-        observeOnDataState()
         binding.swipeRefresh.setOnRefreshListener { viewModel.refresh() }
     }
 
     protected open fun setupAdapter() {
         binding.moviesRV.adapter = adapter
+        adapter.shareListener = { movie ->
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.movies_fragment_share, movie.title, movie.description, movie.id))
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
     }
 
-    protected open fun observeOnDataState() {
-        viewModel.dataState
-            .observeOn(schedulers.mainThread())
+    protected open fun observeOnData() {
+        viewModel.movieDataSource.observeOn(schedulers.mainThread())
+            .doOnNext { dataSource -> adapter.submitList(dataSource.movies) }
+            .switchMap { movieDataSource -> movieDataSource.dataState }
             .subscribe { state ->
                 when (state) {
                     DataState.EMPTY -> {
@@ -65,11 +72,5 @@ abstract class BaseMoviesFragment<ViewModel : BaseMoviesViewModel> :
                     }
                 }
             } with disposable
-    }
-
-    protected open fun observeOnData() {
-        viewModel.movieList.observe(
-            viewLifecycleOwner,
-            Observer<PagedList<Movie>> { list -> adapter.submitList(list) })
     }
 }

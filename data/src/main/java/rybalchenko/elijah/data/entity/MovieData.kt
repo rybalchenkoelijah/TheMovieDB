@@ -46,7 +46,8 @@ class MovieDataEntityMapper @Inject constructor() : Mapper<MovieData, Movie> {
         id = from.id,
         title = from.title,
         description = from.overview,
-        posterPath = from.posterPath ?: ""
+        posterPath = from.posterPath ?: "",
+        isFavorite = from.isFavorite
     )
 
 }
